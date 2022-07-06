@@ -1,0 +1,5 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/lochuynh/Desktop/MasterGolang/simplebank'
+docker run --name postgres1 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=Codnumber1postgres -p 5432:5432 -d postgres
+make: Leaving directory '/home/lochuynh/Desktop/MasterGolang/simplebank'
+ 
