@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Jul  6 09:03:59 2022
+# Make data base, printed on Thu Jul  7 09:29:18 2022
 
 # Variables
 
@@ -25,7 +25,7 @@ SNAP_INSTANCE_KEY =
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1001/vscode-ipc-ac9ee1b3-55c2-4de9-a8fa-f6bb5518dda2.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1001/vscode-ipc-601af9c5-c76f-4e4d-af4a-e58f4e383d68.sock
 # environment
 LC_NAME = vi_VN
 # environment
@@ -51,7 +51,7 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
 .VARIABLES := 
 # environment
-PWD = /home/lochuynh/Desktop/MasterGolang/simplebank
+PWD = /home/lochuynh/Desktop/simplebank
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
@@ -71,7 +71,7 @@ VSCODE_CODE_CACHE_PATH = /home/lochuynh/.config/Code/CachedData/30d9c6cd9483b2cc
 # environment
 LANG = C
 # environment
-XAUTHORITY = /run/user/1001/.mutter-Xwaylandauth.0YT0O1
+XAUTHORITY = /run/user/1001/.mutter-Xwaylandauth.9J9YO1
 # default
 .LOADED := 
 # default
@@ -79,7 +79,7 @@ XAUTHORITY = /run/user/1001/.mutter-Xwaylandauth.0YT0O1
 # makefile
 MAKEFLAGS = pqrR
 # makefile
-CURDIR := /home/lochuynh/Desktop/MasterGolang/simplebank
+CURDIR := /home/lochuynh/Desktop/simplebank
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -109,7 +109,7 @@ ZSH = /home/lochuynh/.oh-my-zsh
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 5943
+VSCODE_PID = 9185
 # environment
 XDG_SESSION_TYPE = wayland
 # automatic
@@ -117,7 +117,7 @@ XDG_SESSION_TYPE = wayland
 # environment
 BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
 # environment
-SESSION_MANAGER = local/LAP00339:@/tmp/.ICE-unix/2769,unix/LAP00339:/tmp/.ICE-unix/2769
+SESSION_MANAGER = local/LAP00339:@/tmp/.ICE-unix/2653,unix/LAP00339:/tmp/.ICE-unix/2653
 # automatic
 *F = $(notdir $*)
 # environment
@@ -163,7 +163,7 @@ LC_TIME = vi_VN
 # environment
 SNAP = /snap/code/99
 # environment
-INVOCATION_ID = ca7d6250e25a4c659e94145c17891c4a
+INVOCATION_ID = 057c8424cd5d4873944a2c871c2e2371
 # environment
 SNAP_REVISION = 99
 # environment
@@ -201,7 +201,7 @@ SNAP_ARCH = amd64
 # makefile
 .DEFAULT_GOAL := postgres
 # environment
-SYSTEMD_EXEC_PID = 2796
+SYSTEMD_EXEC_PID = 2676
 # environment
 DISPLAY = :0
 # environment
@@ -217,11 +217,11 @@ SNAP_DATA = /var/snap/code/99
 # environment
 SNAP_CONTEXT = d40vQKHeMiD12gsVqC0Ji9bsPRm4novVBsBuv1r7Tn2keKTX926P
 # environment
-MANAGERPID = 2601
+MANAGERPID = 2483
 # environment
 LC_MEASUREMENT = vi_VN
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 5824
+GIO_LAUNCHED_DESKTOP_FILE_PID = 9076
 # environment
 PAGER = less
 # environment
@@ -233,7 +233,7 @@ XDG_RUNTIME_DIR = /run/user/1001
 # environment
 GDK_PIXBUF_MODULE_FILE = /home/lochuynh/snap/code/common/.cache/gdk-pixbuf-loaders.cache
 # environment
-JOURNAL_STREAM = 8:35595
+JOURNAL_STREAM = 8:36482
 # environment
 GOMODCACHE = /home/lochuynh/go/pkg/mod
 # environment
@@ -279,6 +279,7 @@ GDMSESSION = ubuntu
 # environment
 LC_IDENTIFICATION = vi_VN
 # environment
+ 
 SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
 # variable set hash-table stats:
 # Load=134/1024=13%, Rehash=0, Collisions=6/164=4%
@@ -289,9 +290,9 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 
 # Directories
 
-# . (device 64769, inode 8268086): 9 files, no impossibilities.
+# . (device 64769, inode 8652815): 10 files, no impossibilities.
 
-# 9 files, no impossibilities in 1 directories.
+# 10 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -304,7 +305,6 @@ migratedown:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
- 
 #  recipe to execute (from 'Makefile', line 14):
 	migrate -path db/migration -database "postgresql://root:Codnumber1postgres@localhost:5432/simple_bank?sslmode=disable" -verbose down
 
@@ -389,12 +389,12 @@ createdb:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 22 / storage = 173 B / avg = 7 B
-# current buf: size = 8162 B / used = 173 B / count = 22 / avg = 7 B
+# strcache buffers: 1 (0) / strings = 23 / storage = 178 B / avg = 7 B
+# current buf: size = 8162 B / used = 178 B / count = 23 / avg = 7 B
 
-# strcache performance: lookups = 41 / hit rate = 46%
+# strcache performance: lookups = 42 / hit rate = 45%
 # hash-table stats:
-# Load=22/8192=0%, Rehash=0, Collisions=0/41=0%
-# Finished Make data base on Wed Jul  6 09:03:59 2022
+# Load=23/8192=0%, Rehash=0, Collisions=0/42=0%
+# Finished Make data base on Thu Jul  7 09:29:18 2022
 
  
