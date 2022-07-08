@@ -29,7 +29,6 @@ func TestTransferTx(t *testing.T) {
 				ToAccountID:   account2.ID,
 				Amount:        amount,
 			})
-
 			errs <- err
 			results <- result
 		}()
