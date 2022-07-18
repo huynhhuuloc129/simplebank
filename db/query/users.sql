@@ -11,3 +11,25 @@ INSERT INTO users(
 -- name: GetUser :one
 SELECT * FROM users
 WHERE username = $1 LIMIT 1;
+
+-- name: GetUserForUpdate :one
+SELECT * FROM users
+WHERE username = $1 LIMIT 1
+FOR NO KEY UPDATE;
+
+-- name: ListUsers :many
+SELECT * FROM users
+ORDER BY username
+LIMIT $1
+OFFSET $2;
+
+-- name: UpdateUser :one
+UPDATE users
+SET hashed_password = $2,
+    full_name = $3
+WHERE username = $1
+RETURNING *;
+
+-- name: DeleteUser :exec
+DELETE FROM users 
+WHERE username = $1;

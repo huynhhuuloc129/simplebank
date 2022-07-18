@@ -17,17 +17,21 @@ type Querier interface {
 	DeleteAccount(ctx context.Context, id int64) error
 	DeleteEntry(ctx context.Context, id int64) error
 	DeleteTransfer(ctx context.Context, id int64) error
+	DeleteUser(ctx context.Context, username string) error
 	GetAccount(ctx context.Context, id int64) (Accounts, error)
 	GetAccountForUpdate(ctx context.Context, id int64) (Accounts, error)
 	GetEntry(ctx context.Context, id int64) (Entries, error)
 	GetTransfer(ctx context.Context, id int64) (Transfers, error)
 	GetUser(ctx context.Context, username string) (Users, error)
+	GetUserForUpdate(ctx context.Context, username string) (Users, error)
 	ListAccounts(ctx context.Context, arg ListAccountsParams) ([]Accounts, error)
 	ListEntries(ctx context.Context, arg ListEntriesParams) ([]Entries, error)
 	ListTransfers(ctx context.Context, arg ListTransfersParams) ([]Transfers, error)
+	ListUsers(ctx context.Context, arg ListUsersParams) ([]Users, error)
 	UpdateAccount(ctx context.Context, arg UpdateAccountParams) (Accounts, error)
 	UpdateEntry(ctx context.Context, arg UpdateEntryParams) (Entries, error)
 	UpdateTransfer(ctx context.Context, arg UpdateTransferParams) (Transfers, error)
+	UpdateUser(ctx context.Context, arg UpdateUserParams) (Users, error)
 }
 
 var _ Querier = (*Queries)(nil)
