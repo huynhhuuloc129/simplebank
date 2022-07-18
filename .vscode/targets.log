@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Jul  8 16:38:39 2022
+# Make data base, printed on Mon Jul 18 14:11:45 2022
 
 # Variables
 
@@ -21,11 +23,13 @@ SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
 SNAP_INSTANCE_KEY = 
 # environment
+GJS_DEBUG_OUTPUT = stderr
+# environment
 LC_NAME = vi_VN
 # environment
 LC_NUMERIC = vi_VN
 # environment
-VSCODE_CWD = /home/lochuynh/Desktop/simplebank
+VSCODE_CWD = /home/lochuynh
 # environment
 LC_ADDRESS = vi_VN
 # default
@@ -39,7 +43,7 @@ GOPATH = /home/lochuynh/go
 # environment
 SNAP_INSTANCE_NAME = code
 # environment
-GDK_PIXBUF_MODULEDIR = /snap/code/100/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
+GDK_PIXBUF_MODULEDIR = /snap/code/101/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
@@ -53,27 +57,23 @@ LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
 XDG_DATA_DIRS = /usr/local/share/:/usr/share/:/var/lib/snapd/desktop
 # environment
-OLDPWD = /home/lochuynh/Desktop/simplebank
+OLDPWD = /home/lochuynh
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_CODE_CACHE_PATH = /home/lochuynh/.config/Code/CachedData/92d25e35d9bf1a6b16f7d0758f25d48ace11e5b9
+VSCODE_CODE_CACHE_PATH = /home/lochuynh/.config/Code/CachedData/b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a
 # environment
 LANG = C
 # environment
-XAUTHORITY = /run/user/1001/.mutter-Xwaylandauth.OBVTO1
+XAUTHORITY = /run/user/1001/.mutter-Xwaylandauth.PTDWP1
 # default
 .LOADED := 
 # default
 .INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
-# environment
-GNOME_TERMINAL_SERVICE = :1.2503
 # makefile
 MAKEFLAGS = pqrR
-# environment
-DBUS_STARTER_ADDRESS = unix:path=/run/user/1001/bus,guid=6bcec35a679dce43f9f819f362c78d54
 # makefile
 CURDIR := /home/lochuynh/Desktop/simplebank
 # environment
@@ -101,19 +101,21 @@ SNAP_REEXEC =
 # environment
 ZSH = /home/lochuynh/.oh-my-zsh
 # environment
-VSCODE_PID = 230295
+VSCODE_PID = 6747
 # environment
 XDG_SESSION_TYPE = wayland
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/LAP00339:@/tmp/.ICE-unix/2658,unix/LAP00339:/tmp/.ICE-unix/2658
+BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
+# environment
+SESSION_MANAGER = local/LAP00339:@/tmp/.ICE-unix/2599,unix/LAP00339:/tmp/.ICE-unix/2599
 # automatic
 *F = $(notdir $*)
 # environment
 CHROME_DESKTOP = code-url-handler.desktop
 # environment
-DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1001/bus,guid=6bcec35a679dce43f9f819f362c78d54
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1001/bus
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # environment
@@ -129,9 +131,9 @@ MAKECMDGOALS := all
 # environment
 XMODIFIERS = @im=ibus
 # environment
-SHLVL = 1
+GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/1f4d48f8_580b_42b8_bb85_b21adc3d61a0
+SHLVL = 0
 # environment
 MAKELEVEL := 0
 # default
@@ -139,7 +141,7 @@ MAKE = $(MAKE_COMMAND)
 # environment
 SNAP_COOKIE = d40vQKHeMiD12gsVqC0Ji9bsPRm4novVBsBuv1r7Tn2keKTX926P
 # environment
-PATH = /home/lochuynh/go/bin:/home/lochuynh/.local/bin:/home/lochuynh/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/local/go/bin:/usr/lib64
+PATH = /home/lochuynh/.local/bin:/home/lochuynh/go/bin:/home/lochuynh/.local/bin:/home/lochuynh/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/local/go/bin:/usr/lib64
 # default
 MAKEFILES := 
 # environment
@@ -151,9 +153,11 @@ SNAP_USER_COMMON = /home/lochuynh/snap/code/common
 # environment
 LC_TIME = vi_VN
 # environment
-SNAP = /snap/code/100
+SNAP = /snap/code/101
 # environment
-SNAP_REVISION = 100
+INVOCATION_ID = 210c6e94f03744568c406009e1239cee
+# environment
+SNAP_REVISION = 101
 # environment
 SNAP_REAL_HOME = /home/lochuynh
 # environment
@@ -167,7 +171,7 @@ LC_TELEPHONE = vi_VN
 # environment
 XDG_CURRENT_DESKTOP = Unity
 # environment
-LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+LS_COLORS = 
 # automatic
 +F = $(notdir $+)
 # environment
@@ -181,11 +185,13 @@ GNUMAKEFLAGS :=
 # environment
 LOGNAME = lochuynh
 # environment
+GIO_LAUNCHED_DESKTOP_FILE = /var/lib/snapd/desktop/applications/code_code.desktop
+# environment
 SNAP_ARCH = amd64
 # makefile
 .DEFAULT_GOAL := postgres
 # environment
-SYSTEMD_EXEC_PID = 2658
+SYSTEMD_EXEC_PID = 2626
 # environment
 DISPLAY = :0
 # environment
@@ -197,23 +203,27 @@ MAKE_VERSION := 4.3
 # environment
 DISABLE_WAYLAND = 1
 # environment
-SNAP_DATA = /var/snap/code/100
+SNAP_DATA = /var/snap/code/101
 # environment
 SNAP_CONTEXT = d40vQKHeMiD12gsVqC0Ji9bsPRm4novVBsBuv1r7Tn2keKTX926P
 # environment
-DBUS_STARTER_BUS_TYPE = session
+MANAGERPID = 2431
 # environment
 LC_MEASUREMENT = vi_VN
 # environment
+GIO_LAUNCHED_DESKTOP_FILE_PID = 6629
+# environment
 PAGER = less
+# environment
+_ = /snap/code/101/usr/share/code/code
 # environment
 LC_PAPER = vi_VN
 # environment
 XDG_RUNTIME_DIR = /run/user/1001
 # environment
-COLORTERM = truecolor
-# environment
 GDK_PIXBUF_MODULE_FILE = /home/lochuynh/snap/code/common/.cache/gdk-pixbuf-loaders.cache
+# environment
+JOURNAL_STREAM = 8:41997
 # environment
 GOMODCACHE = /home/lochuynh/go/pkg/mod
 # environment
@@ -227,13 +237,11 @@ QT_IM_MODULE = ibus
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK = /run/user/1001/vscode-505677e5-1.69.0-main.sock
-# environment
-TERM = xterm-256color
+VSCODE_IPC_HOOK = /run/user/1001/vscode-505677e5-1.69.1-main.sock
 # environment
 SNAP_NAME = code
 # environment
-GSETTINGS_SCHEMA_DIR = /snap/code/100/usr/share/glib-2.0/schemas
+GSETTINGS_SCHEMA_DIR = /snap/code/101/usr/share/glib-2.0/schemas
 # environment
 GOPROXY = https://proxy.golang.org,direct
 # default
@@ -241,7 +249,7 @@ GOPROXY = https://proxy.golang.org,direct
 # automatic
 <F = $(notdir $<)
 # environment
-SNAP_VERSION = 92d25e35
+SNAP_VERSION = b06ae3b2
 # default
 SUFFIXES := 
 # environment
@@ -249,13 +257,11 @@ VSCODE_CLI = 1
 # environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
 # environment
-VTE_VERSION = 6800
-# environment
 SNAP_COMMON = /var/snap/code/common
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
 # environment
-SNAP_USER_DATA = /home/lochuynh/snap/code/100
+SNAP_USER_DATA = /home/lochuynh/snap/code/101
 # environment
 XDG_MENU_PREFIX = gnome-
 # environment
@@ -265,7 +271,7 @@ LC_IDENTIFICATION = vi_VN
 # environment
 SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
 # variable set hash-table stats:
-# Load=127/1024=12%, Rehash=0, Collisions=12/157=8%
+# Load=129/1024=13%, Rehash=0, Collisions=5/159=3%
 
 # Pattern-specific Variable Values
 
@@ -274,11 +280,9 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 # Directories
 
 # . (device 64769, inode 8652815): 14 files, no impossibilities.
+ 
 
 # 14 files, no impossibilities in 1 directories.
- 
-make: *** No rule to make target 'all'.  Stop.
-
 
 # Implicit Rules
 
@@ -297,9 +301,17 @@ migratedown:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-08 09:46:33.001785118
+#  Last modified 2022-07-08 16:59:01.574468235
 #  File has been updated.
 #  Successfully updated.
+
+mock:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 26):
+	mockgen -package mockdb -destination db/mock/store.go github.com/huynhhuuloc129/simplebank/db/sqlc Store
 
 dropdb:
 #  Phony target (prerequisite of .PHONY).
@@ -370,25 +382,25 @@ createdb:
 #  recipe to execute (from 'Makefile', line 5):
 	docker exec -it postgres1 createdb --username=root --owner=root simple_bank
 
-.PHONY: postgres createdb dropdb migrateup migratedown sqlc test server
+.PHONY: postgres createdb dropdb migrateup migratedown sqlc test server mock
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=13/1024=1%, Rehash=0, Collisions=0/31=0%
+# Load=14/1024=1%, Rehash=0, Collisions=1/33=3%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 28 / storage = 213 B / avg = 7 B
-# current buf: size = 8162 B / used = 213 B / count = 28 / avg = 7 B
+# strcache buffers: 1 (0) / strings = 29 / storage = 218 B / avg = 7 B
+# current buf: size = 8162 B / used = 218 B / count = 29 / avg = 7 B
 
-# strcache performance: lookups = 49 / hit rate = 42%
+# strcache performance: lookups = 52 / hit rate = 44%
 # hash-table stats:
-# Load=28/8192=0%, Rehash=0, Collisions=0/49=0%
-# Finished Make data base on Fri Jul  8 16:38:39 2022
+# Load=29/8192=0%, Rehash=0, Collisions=0/52=0%
+# Finished Make data base on Mon Jul 18 14:11:45 2022
 
  
