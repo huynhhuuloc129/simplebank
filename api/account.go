@@ -2,7 +2,6 @@ package api
 
 import (
 	"database/sql"
-	"errors"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -72,20 +71,7 @@ func (server *Server) listAccount(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
-
-	if ok, err := MissingAllFieldStruct(&req); ok {
-		if err != nil {
-			ctx.JSON(http.StatusBadRequest, errorResponse(err))
-			return
-		}
-		server.getAllAccount(ctx)
-	}
-	if ok, err := MissingFieldStruct(&req); ok {
-		if err != nil {
-			ctx.JSON(http.StatusBadRequest, errorResponse(err))
-			return
-		}
-		ctx.JSON(http.StatusBadRequest, errorResponse(errors.New("Request must have all field or empty")))
+	if !server.passListToGetAll(ctx, req) {
 		return
 	}
 

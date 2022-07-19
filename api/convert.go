@@ -4,7 +4,37 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
+
+func (server *Server)passListToGetAll(ctx *gin.Context, req listRequest) bool {
+	fmt.Println(ctx.Request.URL)
+	if ok, err := MissingAllFieldStruct(&req); ok {
+		switch ctx.Request.URL.String(){
+		case "/users/", "/users":
+			server.getAllUser(ctx)
+		case "/accounts/", "/accounts":
+			server.getAllAccount(ctx)
+		case "/transfers/", "/transfers":
+			server.getAllTransfers(ctx)
+		}
+		server.getAllTransfers(ctx)
+		return false
+	} else if err != nil {
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return false
+	}
+	if ok, err := MissingFieldStruct(&req); ok {
+		ctx.JSON(http.StatusBadRequest, errorResponse(errors.New("Request must have all field or empty")))
+		return false
+	} else  if err != nil {
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return false
+	}
+	return true
+}
 
 func ConvertListRequestToMap(obj interface{}) (map[string]interface{}, error){
 	var objMap map [string]interface{}

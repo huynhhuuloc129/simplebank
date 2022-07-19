@@ -2,7 +2,6 @@ package api
 
 import (
 	"database/sql"
-	"errors"
 	"net/http"
 	"time"
 
@@ -103,20 +102,8 @@ func (server *Server) listUser(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
-
-	if ok, err := MissingAllFieldStruct(&req); ok {
-		if err != nil {
-			ctx.JSON(http.StatusBadRequest, errorResponse(err))
-			return
-		}
-		server.getAllUser(ctx)
-	}
-	if ok, err := MissingFieldStruct(&req); ok {
-		if err != nil {
-			ctx.JSON(http.StatusBadRequest, errorResponse(err))
-			return
-		}
-		ctx.JSON(http.StatusBadRequest, errorResponse(errors.New("Request must have all field or empty")))
+	
+	if !server.passListToGetAll(ctx, req) {
 		return
 	}
 
@@ -146,7 +133,7 @@ func (server *Server) getAllUser(ctx *gin.Context) {
 	}
 
 	var userResp []userResponse
-	for _, user := range users{
+	for _, user := range users {
 		userResp = append(userResp, userToUserResponse(user))
 	}
 	ctx.JSON(http.StatusOK, userResp)
@@ -179,7 +166,7 @@ func (server *Server) deleteUser(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, responseDelete{status: "success", message: "delete successful"})
 }
 
-func (server *Server) deleteForeignOfUser(ctx *gin.Context, accountID int64){
+func (server *Server) deleteForeignOfUser(ctx *gin.Context, accountID int64) {
 	server.deleteForeignOfAccount(ctx, accountID)
 
 	if err := server.store.DeleteAccount(ctx, accountID); err != nil {

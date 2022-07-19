@@ -8,8 +8,8 @@ import (
 )
 
 // Server serves HTTP requests for our banking service.
-type Server struct{
-	store db.Store
+type Server struct {
+	store  db.Store
 	router *gin.Engine
 }
 
@@ -19,7 +19,7 @@ type listRequest struct {
 }
 
 // NewServer create a new HTTP server and setup routing.
-func NewServer(store db.Store) *Server{
+func NewServer(store db.Store) *Server {
 	server := &Server{store: store}
 	router := gin.Default()
 
@@ -38,9 +38,9 @@ func NewServer(store db.Store) *Server{
 	router.DELETE("/users/:username", server.deleteUser)
 
 	router.POST("/transfers", server.createTransfer)
-	// router.GET("/transfers/:id", server.getTransfer)
-	// router.GET("/transfers/", server.listTransfer)
-	// router.DELETE("/transfers/:id", server.deleteTransfer)
+	router.GET("/transfers/:id", server.getTransfer)
+	router.GET("/transfers/", server.listTransfer)
+	router.DELETE("/transfers/:id", server.deleteTransfer)
 
 	server.router = router
 	return server
