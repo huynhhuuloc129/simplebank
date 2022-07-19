@@ -127,8 +127,10 @@ func (server *Server) listUser(ctx *gin.Context) {
 }
 
 type deleteUserRequest struct {
-	username string `uri:"username" binding:"required,min=1"`
+	Username string `uri:"username" binding:"required,min=1"`
 }
+
+
 
 func (server *Server) deleteUser(ctx *gin.Context) {
 	var req deleteUserRequest
@@ -137,7 +139,31 @@ func (server *Server) deleteUser(ctx *gin.Context) {
 		return
 	}
 
-	if err := server.store.DeleteUser(ctx, req.username); err != nil {
+	accounts, err := server.store.GetAllAccountsFromUser(ctx, req.Username)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	for _, account := range accounts {
+		err :=server.store.DeleteEntriesByAccountID(ctx, account.ID)
+		if err != nil {
+			ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+			return
+		}
+		
+		err =server.store.DeleteTransfersByAccountID(ctx, account.ID)
+		if err != nil {
+			ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+			return
+		}
+
+		if err := server.store.DeleteAccount(ctx, int64(account.ID)); err != nil {
+			ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+			return
+		}
+	}
+	if err := server.store.DeleteUser(ctx, req.Username); err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}

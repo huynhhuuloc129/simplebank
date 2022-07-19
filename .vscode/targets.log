@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'all'.  Stop.
-
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jul 18 14:11:45 2022
+# Make data base, printed on Tue Jul 19 09:00:50 2022
 
 # Variables
 
@@ -67,7 +65,7 @@ VSCODE_CODE_CACHE_PATH = /home/lochuynh/.config/Code/CachedData/b06ae3b2d2dbfe28
 # environment
 LANG = C
 # environment
-XAUTHORITY = /run/user/1001/.mutter-Xwaylandauth.PTDWP1
+XAUTHORITY = /run/user/1001/.mutter-Xwaylandauth.0U9LP1
 # default
 .LOADED := 
 # default
@@ -101,7 +99,7 @@ SNAP_REEXEC =
 # environment
 ZSH = /home/lochuynh/.oh-my-zsh
 # environment
-VSCODE_PID = 6747
+VSCODE_PID = 6286
 # environment
 XDG_SESSION_TYPE = wayland
 # automatic
@@ -109,7 +107,7 @@ XDG_SESSION_TYPE = wayland
 # environment
 BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
 # environment
-SESSION_MANAGER = local/LAP00339:@/tmp/.ICE-unix/2599,unix/LAP00339:/tmp/.ICE-unix/2599
+SESSION_MANAGER = local/LAP00339:@/tmp/.ICE-unix/2604,unix/LAP00339:/tmp/.ICE-unix/2604
 # automatic
 *F = $(notdir $*)
 # environment
@@ -155,7 +153,7 @@ LC_TIME = vi_VN
 # environment
 SNAP = /snap/code/101
 # environment
-INVOCATION_ID = 210c6e94f03744568c406009e1239cee
+INVOCATION_ID = 104f5096e77145eeb1535206657a1d67
 # environment
 SNAP_REVISION = 101
 # environment
@@ -191,7 +189,7 @@ SNAP_ARCH = amd64
 # makefile
 .DEFAULT_GOAL := postgres
 # environment
-SYSTEMD_EXEC_PID = 2626
+SYSTEMD_EXEC_PID = 2624
 # environment
 DISPLAY = :0
 # environment
@@ -211,7 +209,7 @@ MANAGERPID = 2431
 # environment
 LC_MEASUREMENT = vi_VN
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 6629
+GIO_LAUNCHED_DESKTOP_FILE_PID = 6236
 # environment
 PAGER = less
 # environment
@@ -223,7 +221,7 @@ XDG_RUNTIME_DIR = /run/user/1001
 # environment
 GDK_PIXBUF_MODULE_FILE = /home/lochuynh/snap/code/common/.cache/gdk-pixbuf-loaders.cache
 # environment
-JOURNAL_STREAM = 8:41997
+JOURNAL_STREAM = 8:38303
 # environment
 GOMODCACHE = /home/lochuynh/go/pkg/mod
 # environment
@@ -280,7 +278,9 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 # Directories
 
 # . (device 64769, inode 8652815): 14 files, no impossibilities.
+
  
+make: *** No rule to make target 'all'.  Stop.
 
 # 14 files, no impossibilities in 1 directories.
 
@@ -295,13 +295,13 @@ migratedown:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 14):
+#  recipe to execute (from 'Makefile', line 17):
 	migrate -path db/migration -database "postgresql://root:Codnumber1postgres@localhost:5432/simple_bank?sslmode=disable" -verbose down
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-08 16:59:01.574468235
+#  Last modified 2022-07-18 15:07:14.228957397
 #  File has been updated.
 #  Successfully updated.
 
@@ -310,7 +310,7 @@ mock:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 26):
+#  recipe to execute (from 'Makefile', line 32):
 	mockgen -package mockdb -destination db/mock/store.go github.com/huynhhuuloc129/simplebank/db/sqlc Store
 
 dropdb:
@@ -321,12 +321,20 @@ dropdb:
 #  recipe to execute (from 'Makefile', line 8):
 	docker exec -it postgres1 dropdb simple_bank
 
+migratedown1:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 20):
+	migrate -path db/migration -database "postgresql://root:Codnumber1postgres@localhost:5432/simple_bank?sslmode=disable" -verbose down 1
+
 server:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 23):
+#  recipe to execute (from 'Makefile', line 29):
 	go run main.go
 
 migrateup:
@@ -355,7 +363,7 @@ test:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 20):
+#  recipe to execute (from 'Makefile', line 26):
 	go test -v -cover ./...
 
 sqlc:
@@ -363,8 +371,16 @@ sqlc:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 17):
+#  recipe to execute (from 'Makefile', line 23):
 	sqlc generate
+
+migrateup1:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 14):
+	migrate -path db/migration -database "postgresql://root:Codnumber1postgres@localhost:5432/simple_bank?sslmode=disable" -verbose up 1
 
 postgres:
 #  Phony target (prerequisite of .PHONY).
@@ -382,25 +398,25 @@ createdb:
 #  recipe to execute (from 'Makefile', line 5):
 	docker exec -it postgres1 createdb --username=root --owner=root simple_bank
 
-.PHONY: postgres createdb dropdb migrateup migratedown sqlc test server mock
+.PHONY: postgres createdb dropdb migrateup migrateup1 migratedown migratedown1 sqlc test server mock
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=14/1024=1%, Rehash=0, Collisions=1/33=3%
+# Load=16/1024=2%, Rehash=0, Collisions=1/37=3%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 29 / storage = 218 B / avg = 7 B
-# current buf: size = 8162 B / used = 218 B / count = 29 / avg = 7 B
+# strcache buffers: 1 (0) / strings = 31 / storage = 242 B / avg = 7 B
+# current buf: size = 8162 B / used = 242 B / count = 31 / avg = 7 B
 
-# strcache performance: lookups = 52 / hit rate = 44%
+# strcache performance: lookups = 58 / hit rate = 46%
 # hash-table stats:
-# Load=29/8192=0%, Rehash=0, Collisions=0/52=0%
-# Finished Make data base on Mon Jul 18 14:11:45 2022
+# Load=31/8192=0%, Rehash=0, Collisions=0/58=0%
+# Finished Make data base on Tue Jul 19 09:00:50 2022
 
  

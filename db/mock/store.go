@@ -124,6 +124,20 @@ func (mr *MockStoreMockRecorder) DeleteAccount(arg0, arg1 interface{}) *gomock.C
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteAccount", reflect.TypeOf((*MockStore)(nil).DeleteAccount), arg0, arg1)
 }
 
+// DeleteEntriesByAccountID mocks base method.
+func (m *MockStore) DeleteEntriesByAccountID(arg0 context.Context, arg1 int64) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteEntriesByAccountID", arg0, arg1)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteEntriesByAccountID indicates an expected call of DeleteEntriesByAccountID.
+func (mr *MockStoreMockRecorder) DeleteEntriesByAccountID(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteEntriesByAccountID", reflect.TypeOf((*MockStore)(nil).DeleteEntriesByAccountID), arg0, arg1)
+}
+
 // DeleteEntry mocks base method.
 func (m *MockStore) DeleteEntry(arg0 context.Context, arg1 int64) error {
 	m.ctrl.T.Helper()
@@ -150,6 +164,20 @@ func (m *MockStore) DeleteTransfer(arg0 context.Context, arg1 int64) error {
 func (mr *MockStoreMockRecorder) DeleteTransfer(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteTransfer", reflect.TypeOf((*MockStore)(nil).DeleteTransfer), arg0, arg1)
+}
+
+// DeleteTransfersByAccountID mocks base method.
+func (m *MockStore) DeleteTransfersByAccountID(arg0 context.Context, arg1 int64) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteTransfersByAccountID", arg0, arg1)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteTransfersByAccountID indicates an expected call of DeleteTransfersByAccountID.
+func (mr *MockStoreMockRecorder) DeleteTransfersByAccountID(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteTransfersByAccountID", reflect.TypeOf((*MockStore)(nil).DeleteTransfersByAccountID), arg0, arg1)
 }
 
 // DeleteUser mocks base method.
@@ -194,6 +222,21 @@ func (m *MockStore) GetAccountForUpdate(arg0 context.Context, arg1 int64) (db.Ac
 func (mr *MockStoreMockRecorder) GetAccountForUpdate(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAccountForUpdate", reflect.TypeOf((*MockStore)(nil).GetAccountForUpdate), arg0, arg1)
+}
+
+// GetAllAccountsFromUser mocks base method.
+func (m *MockStore) GetAllAccountsFromUser(arg0 context.Context, arg1 string) ([]db.Accounts, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAllAccountsFromUser", arg0, arg1)
+	ret0, _ := ret[0].([]db.Accounts)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAllAccountsFromUser indicates an expected call of GetAllAccountsFromUser.
+func (mr *MockStoreMockRecorder) GetAllAccountsFromUser(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAllAccountsFromUser", reflect.TypeOf((*MockStore)(nil).GetAllAccountsFromUser), arg0, arg1)
 }
 
 // GetEntry mocks base method.

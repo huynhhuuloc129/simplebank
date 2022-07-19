@@ -24,3 +24,8 @@ RETURNING *;
 -- name: DeleteTransfer :exec
 DELETE FROM transfers 
 WHERE id = $1;
+
+-- name: DeleteTransfersByAccountID :exec
+DELETE FROM transfers
+WHERE from_account_id = $1 
+OR to_account_id = $1;

@@ -110,6 +110,40 @@ func (q *Queries) GetAccountForUpdate(ctx context.Context, id int64) (Accounts, 
 	return i, err
 }
 
+const getAllAccountsFromUser = `-- name: GetAllAccountsFromUser :many
+SELECT id, owner, balance, currency, created_at FROM accounts 
+WHERE owner = $1
+`
+
+func (q *Queries) GetAllAccountsFromUser(ctx context.Context, owner string) ([]Accounts, error) {
+	rows, err := q.query(ctx, q.getAllAccountsFromUserStmt, getAllAccountsFromUser, owner)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []Accounts{}
+	for rows.Next() {
+		var i Accounts
+		if err := rows.Scan(
+			&i.ID,
+			&i.Owner,
+			&i.Balance,
+			&i.Currency,
+			&i.CreatedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const listAccounts = `-- name: ListAccounts :many
 SELECT id, owner, balance, currency, created_at FROM accounts
 ORDER BY id

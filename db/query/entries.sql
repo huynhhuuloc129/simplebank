@@ -24,3 +24,7 @@ RETURNING *;
 -- name: DeleteEntry :exec
 DELETE FROM entries 
 WHERE id = $1;
+
+-- name: DeleteEntriesByAccountID :exec
+DELETE FROM entries
+WHERE account_id = $1;
