@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Jul 19 09:00:50 2022
+# Make data base, printed on Tue Jul 19 13:25:34 2022
 
 # Variables
 
@@ -99,7 +99,7 @@ SNAP_REEXEC =
 # environment
 ZSH = /home/lochuynh/.oh-my-zsh
 # environment
-VSCODE_PID = 6286
+VSCODE_PID = 387290
 # environment
 XDG_SESSION_TYPE = wayland
 # automatic
@@ -209,7 +209,7 @@ MANAGERPID = 2431
 # environment
 LC_MEASUREMENT = vi_VN
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 6236
+GIO_LAUNCHED_DESKTOP_FILE_PID = 387242
 # environment
 PAGER = less
 # environment
@@ -279,10 +279,10 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 
 # . (device 64769, inode 8652815): 14 files, no impossibilities.
 
+# 14 files, no impossibilities in 1 directories.
+
  
 make: *** No rule to make target 'all'.  Stop.
-
-# 14 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -417,6 +417,6 @@ createdb:
 # strcache performance: lookups = 58 / hit rate = 46%
 # hash-table stats:
 # Load=31/8192=0%, Rehash=0, Collisions=0/58=0%
-# Finished Make data base on Tue Jul 19 09:00:50 2022
+# Finished Make data base on Tue Jul 19 13:25:34 2022
 
  

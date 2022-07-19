@@ -15,6 +15,9 @@ ORDER BY id
 LIMIT $1
 OFFSET $2;
 
+-- name: GetAllTransfers :many
+SELECT * FROM transfers;
+
 -- name: UpdateTransfer :one
 UPDATE transfers
 SET amount = $2

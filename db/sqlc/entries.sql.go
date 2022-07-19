@@ -54,6 +54,38 @@ func (q *Queries) DeleteEntry(ctx context.Context, id int64) error {
 	return err
 }
 
+const getAllEntries = `-- name: GetAllEntries :many
+SELECT id, account_id, amount, created_at FROM entries
+`
+
+func (q *Queries) GetAllEntries(ctx context.Context) ([]Entries, error) {
+	rows, err := q.query(ctx, q.getAllEntriesStmt, getAllEntries)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []Entries{}
+	for rows.Next() {
+		var i Entries
+		if err := rows.Scan(
+			&i.ID,
+			&i.AccountID,
+			&i.Amount,
+			&i.CreatedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const getEntry = `-- name: GetEntry :one
 SELECT id, account_id, amount, created_at FROM entries
 WHERE id = $1 LIMIT 1

@@ -22,7 +22,11 @@ type Querier interface {
 	DeleteUser(ctx context.Context, username string) error
 	GetAccount(ctx context.Context, id int64) (Accounts, error)
 	GetAccountForUpdate(ctx context.Context, id int64) (Accounts, error)
+	GetAllAccounts(ctx context.Context) ([]Accounts, error)
 	GetAllAccountsFromUser(ctx context.Context, owner string) ([]Accounts, error)
+	GetAllEntries(ctx context.Context) ([]Entries, error)
+	GetAllTransfers(ctx context.Context) ([]Transfers, error)
+	GetAllUsers(ctx context.Context) ([]Users, error)
 	GetEntry(ctx context.Context, id int64) (Entries, error)
 	GetTransfer(ctx context.Context, id int64) (Transfers, error)
 	GetUser(ctx context.Context, username string) (Users, error)

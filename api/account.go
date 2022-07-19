@@ -2,6 +2,7 @@ package api
 
 import (
 	"database/sql"
+	"errors"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -64,15 +65,27 @@ func (server *Server) getAccount(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, account)
 }
 
-type listAccountRequest struct {
-	PageID   int32 `form:"page_id" binding:"required,min=1"`
-	PageSize int32 `form:"page_size" binding:"required,min=5,max=10"`
-}
 
 func (server *Server) listAccount(ctx *gin.Context) {
-	var req listAccountRequest
+	var req listRequest
 	if err := ctx.ShouldBindQuery(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
+
+	if ok, err := MissingAllFieldStruct(&req); ok {
+		if err != nil {
+			ctx.JSON(http.StatusBadRequest, errorResponse(err))
+			return
+		}
+		server.getAllAccount(ctx)
+	}
+	if ok, err := MissingFieldStruct(&req); ok {
+		if err != nil {
+			ctx.JSON(http.StatusBadRequest, errorResponse(err))
+			return
+		}
+		ctx.JSON(http.StatusBadRequest, errorResponse(errors.New("Request must have all field or empty")))
 		return
 	}
 
@@ -86,6 +99,15 @@ func (server *Server) listAccount(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
+	ctx.JSON(http.StatusOK, accounts)
+}
+
+func (server *Server) getAllAccount(ctx *gin.Context){
+	accounts, err := server.store.GetAllAccounts(ctx)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+	}
+
 	ctx.JSON(http.StatusOK, accounts)
 }
 
@@ -103,10 +125,25 @@ func (server *Server) deleteAccount(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
-
+	
+	server.deleteForeignOfAccount(ctx, int64(req.ID))
 	if err := server.store.DeleteAccount(ctx, int64(req.ID)); err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
 	ctx.JSON(http.StatusOK, responseDelete{status: "success", message: "delete successful"})
+}
+
+func (server *Server) deleteForeignOfAccount(ctx *gin.Context, accountID int64){
+	err := server.store.DeleteEntriesByAccountID(ctx, accountID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	err = server.store.DeleteTransfersByAccountID(ctx, accountID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
 }

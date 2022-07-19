@@ -56,6 +56,40 @@ func (q *Queries) DeleteUser(ctx context.Context, username string) error {
 	return err
 }
 
+const getAllUsers = `-- name: GetAllUsers :many
+SELECT username, hashed_password, full_name, email, password_changed_at, created_at FROM users
+`
+
+func (q *Queries) GetAllUsers(ctx context.Context) ([]Users, error) {
+	rows, err := q.query(ctx, q.getAllUsersStmt, getAllUsers)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []Users{}
+	for rows.Next() {
+		var i Users
+		if err := rows.Scan(
+			&i.Username,
+			&i.HashedPassword,
+			&i.FullName,
+			&i.Email,
+			&i.PasswordChangedAt,
+			&i.CreatedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const getUser = `-- name: GetUser :one
 SELECT username, hashed_password, full_name, email, password_changed_at, created_at FROM users
 WHERE username = $1 LIMIT 1

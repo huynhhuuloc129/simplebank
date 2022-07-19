@@ -15,6 +15,9 @@ ORDER BY id
 LIMIT $1
 OFFSET $2;
 
+-- name: GetAllEntries :many
+SELECT * FROM entries;
+
 -- name: UpdateEntry :one
 UPDATE entries
 SET amount = $2

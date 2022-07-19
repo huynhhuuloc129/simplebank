@@ -63,8 +63,20 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.getAccountForUpdateStmt, err = db.PrepareContext(ctx, getAccountForUpdate); err != nil {
 		return nil, fmt.Errorf("error preparing query GetAccountForUpdate: %w", err)
 	}
+	if q.getAllAccountsStmt, err = db.PrepareContext(ctx, getAllAccounts); err != nil {
+		return nil, fmt.Errorf("error preparing query GetAllAccounts: %w", err)
+	}
 	if q.getAllAccountsFromUserStmt, err = db.PrepareContext(ctx, getAllAccountsFromUser); err != nil {
 		return nil, fmt.Errorf("error preparing query GetAllAccountsFromUser: %w", err)
+	}
+	if q.getAllEntriesStmt, err = db.PrepareContext(ctx, getAllEntries); err != nil {
+		return nil, fmt.Errorf("error preparing query GetAllEntries: %w", err)
+	}
+	if q.getAllTransfersStmt, err = db.PrepareContext(ctx, getAllTransfers); err != nil {
+		return nil, fmt.Errorf("error preparing query GetAllTransfers: %w", err)
+	}
+	if q.getAllUsersStmt, err = db.PrepareContext(ctx, getAllUsers); err != nil {
+		return nil, fmt.Errorf("error preparing query GetAllUsers: %w", err)
 	}
 	if q.getEntryStmt, err = db.PrepareContext(ctx, getEntry); err != nil {
 		return nil, fmt.Errorf("error preparing query GetEntry: %w", err)
@@ -172,9 +184,29 @@ func (q *Queries) Close() error {
 			err = fmt.Errorf("error closing getAccountForUpdateStmt: %w", cerr)
 		}
 	}
+	if q.getAllAccountsStmt != nil {
+		if cerr := q.getAllAccountsStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getAllAccountsStmt: %w", cerr)
+		}
+	}
 	if q.getAllAccountsFromUserStmt != nil {
 		if cerr := q.getAllAccountsFromUserStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing getAllAccountsFromUserStmt: %w", cerr)
+		}
+	}
+	if q.getAllEntriesStmt != nil {
+		if cerr := q.getAllEntriesStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getAllEntriesStmt: %w", cerr)
+		}
+	}
+	if q.getAllTransfersStmt != nil {
+		if cerr := q.getAllTransfersStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getAllTransfersStmt: %w", cerr)
+		}
+	}
+	if q.getAllUsersStmt != nil {
+		if cerr := q.getAllUsersStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getAllUsersStmt: %w", cerr)
 		}
 	}
 	if q.getEntryStmt != nil {
@@ -289,7 +321,11 @@ type Queries struct {
 	deleteUserStmt                 *sql.Stmt
 	getAccountStmt                 *sql.Stmt
 	getAccountForUpdateStmt        *sql.Stmt
+	getAllAccountsStmt             *sql.Stmt
 	getAllAccountsFromUserStmt     *sql.Stmt
+	getAllEntriesStmt              *sql.Stmt
+	getAllTransfersStmt            *sql.Stmt
+	getAllUsersStmt                *sql.Stmt
 	getEntryStmt                   *sql.Stmt
 	getTransferStmt                *sql.Stmt
 	getUserStmt                    *sql.Stmt
@@ -321,7 +357,11 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		deleteUserStmt:                 q.deleteUserStmt,
 		getAccountStmt:                 q.getAccountStmt,
 		getAccountForUpdateStmt:        q.getAccountForUpdateStmt,
+		getAllAccountsStmt:             q.getAllAccountsStmt,
 		getAllAccountsFromUserStmt:     q.getAllAccountsFromUserStmt,
+		getAllEntriesStmt:              q.getAllEntriesStmt,
+		getAllTransfersStmt:            q.getAllTransfersStmt,
+		getAllUsersStmt:                q.getAllUsersStmt,
 		getEntryStmt:                   q.getEntryStmt,
 		getTransferStmt:                q.getTransferStmt,
 		getUserStmt:                    q.getUserStmt,

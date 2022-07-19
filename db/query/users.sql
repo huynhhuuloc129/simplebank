@@ -23,6 +23,9 @@ ORDER BY username
 LIMIT $1
 OFFSET $2;
 
+-- name: GetAllUsers :many
+SELECT * FROM users;
+
 -- name: UpdateUser :one
 UPDATE users
 SET hashed_password = $2,

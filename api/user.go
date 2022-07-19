@@ -2,6 +2,7 @@ package api
 
 import (
 	"database/sql"
+	"errors"
 	"net/http"
 	"time"
 
@@ -12,10 +13,10 @@ import (
 )
 
 type createUserRequest struct {
-	Username    string `json:"username" binding:"required,alphanum"`
+	Username string `json:"username" binding:"required,alphanum"`
 	Password string `json:"password" binding:"required,min=6"`
 	Fullname string `json:"full_name" binding:"required"`
-	Email string `json:"email" binding:"required,email"`
+	Email    string `json:"email" binding:"required,email"`
 }
 
 type userResponse struct {
@@ -28,10 +29,10 @@ type userResponse struct {
 
 func userToUserResponse(user db.Users) userResponse {
 	return userResponse{
-		Username: user.Username,
-		FullName: user.FullName,
-		Email: user.Email,
-		CreatedAt: user.CreatedAt,
+		Username:          user.Username,
+		FullName:          user.FullName,
+		Email:             user.Email,
+		CreatedAt:         user.CreatedAt,
 		PasswordChangedAt: user.PasswordChangedAt,
 	}
 }
@@ -50,10 +51,10 @@ func (server *Server) createUser(ctx *gin.Context) {
 	}
 
 	arg := db.CreateUserParams{
-		Username:    req.Username,
+		Username:       req.Username,
 		HashedPassword: hashedPassword,
-		FullName:  req.Fullname,
-		Email: req.Email,
+		FullName:       req.Fullname,
+		Email:          req.Email,
 	}
 
 	user, err := server.store.CreateUser(ctx, arg)
@@ -96,15 +97,26 @@ func (server *Server) getUser(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, rsp)
 }
 
-type listUserRequest struct {
-	PageID   int32 `form:"page_id" binding:"required,min=1"`
-	PageSize int32 `form:"page_size" binding:"required,min=5,max=10"`
-}
-
 func (server *Server) listUser(ctx *gin.Context) {
-	var req listUserRequest
+	var req listRequest
 	if err := ctx.ShouldBindQuery(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
+
+	if ok, err := MissingAllFieldStruct(&req); ok {
+		if err != nil {
+			ctx.JSON(http.StatusBadRequest, errorResponse(err))
+			return
+		}
+		server.getAllUser(ctx)
+	}
+	if ok, err := MissingFieldStruct(&req); ok {
+		if err != nil {
+			ctx.JSON(http.StatusBadRequest, errorResponse(err))
+			return
+		}
+		ctx.JSON(http.StatusBadRequest, errorResponse(errors.New("Request must have all field or empty")))
 		return
 	}
 
@@ -118,7 +130,7 @@ func (server *Server) listUser(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
-	
+
 	var rsp []userResponse
 	for _, user := range users {
 		rsp = append(rsp, userToUserResponse(user))
@@ -126,11 +138,23 @@ func (server *Server) listUser(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, rsp)
 }
 
+func (server *Server) getAllUser(ctx *gin.Context) {
+	users, err := server.store.GetAllUsers(ctx)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	var userResp []userResponse
+	for _, user := range users{
+		userResp = append(userResp, userToUserResponse(user))
+	}
+	ctx.JSON(http.StatusOK, userResp)
+}
+
 type deleteUserRequest struct {
 	Username string `uri:"username" binding:"required,min=1"`
 }
-
-
 
 func (server *Server) deleteUser(ctx *gin.Context) {
 	var req deleteUserRequest
@@ -146,26 +170,20 @@ func (server *Server) deleteUser(ctx *gin.Context) {
 	}
 
 	for _, account := range accounts {
-		err :=server.store.DeleteEntriesByAccountID(ctx, account.ID)
-		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, errorResponse(err))
-			return
-		}
-		
-		err =server.store.DeleteTransfersByAccountID(ctx, account.ID)
-		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, errorResponse(err))
-			return
-		}
-
-		if err := server.store.DeleteAccount(ctx, int64(account.ID)); err != nil {
-			ctx.JSON(http.StatusInternalServerError, errorResponse(err))
-			return
-		}
+		server.deleteForeignOfUser(ctx, account.ID)
 	}
 	if err := server.store.DeleteUser(ctx, req.Username); err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
 	ctx.JSON(http.StatusOK, responseDelete{status: "success", message: "delete successful"})
+}
+
+func (server *Server) deleteForeignOfUser(ctx *gin.Context, accountID int64){
+	server.deleteForeignOfAccount(ctx, accountID)
+
+	if err := server.store.DeleteAccount(ctx, accountID); err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
 }

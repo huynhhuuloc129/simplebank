@@ -11,6 +11,11 @@ type Server struct{
 	router *gin.Engine
 }
 
+type listRequest struct {
+	PageID   int32 `form:"page_id"`
+	PageSize int32 `form:"page_size"`
+}
+
 // NewServer create a new HTTP server and setup routing.
 func NewServer(store db.Store) *Server{
 	server := &Server{store: store}
