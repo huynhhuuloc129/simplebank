@@ -10,7 +10,7 @@ import (
 	"github.com/lib/pq"
 )
 
-type transferRequest struct {
+type TransferRequest struct {
 	FromAccountID int64  `json:"from_account_id" binding:"required,min=1"`
 	ToAccountID   int64  `json:"to_account_id" binding:"required,min=1"`
 	Amount        int64  `json:"amount" binding:"required,gt=0"`
@@ -18,7 +18,7 @@ type transferRequest struct {
 }
 
 func (server *Server) createTransfer(ctx *gin.Context) {
-	var req transferRequest
+	var req TransferRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
@@ -85,7 +85,7 @@ func (server *Server) getTransfer(ctx *gin.Context) {
 			ctx.JSON(http.StatusNotFound, errorResponse(err))
 			return
 		}
-		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
 	ctx.JSON(http.StatusOK, transfer)

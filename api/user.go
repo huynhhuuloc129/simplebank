@@ -125,7 +125,7 @@ func (server *Server) listUser(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, rsp)
 }
 
-func (server *Server) getAllUser(ctx *gin.Context) {
+func (server *Server) getAllUsers(ctx *gin.Context) {
 	users, err := server.store.GetAllUsers(ctx)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))

@@ -87,12 +87,11 @@ func (server *Server) listAccount(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, accounts)
 }
 
-func (server *Server) getAllAccount(ctx *gin.Context) {
+func (server *Server) getAllAccounts(ctx *gin.Context) {
 	accounts, err := server.store.GetAllAccounts(ctx)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 	}
-
 	ctx.JSON(http.StatusOK, accounts)
 }
 
@@ -111,7 +110,10 @@ func (server *Server) deleteAccount(ctx *gin.Context) {
 		return
 	}
 
-	server.deleteForeignOfAccount(ctx, int64(req.ID))
+	if err := server.deleteForeignOfAccount(ctx, int64(req.ID)); err != nil {
+		return
+	}
+
 	if err := server.store.DeleteAccount(ctx, int64(req.ID)); err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
@@ -119,16 +121,17 @@ func (server *Server) deleteAccount(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, responseDelete{status: "success", message: "delete successful"})
 }
 
-func (server *Server) deleteForeignOfAccount(ctx *gin.Context, accountID int64) {
+func (server *Server) deleteForeignOfAccount(ctx *gin.Context, accountID int64) error {
 	err := server.store.DeleteEntriesByAccountID(ctx, accountID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
-		return
+		return err
 	}
 
 	err = server.store.DeleteTransfersByAccountID(ctx, accountID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
-		return
+		return err
 	}
+	return nil
 }

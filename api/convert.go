@@ -14,13 +14,14 @@ func (server *Server) passListToGetAll(ctx *gin.Context, req listRequest) bool {
 	if ok, err := MissingAllFieldStruct(&req); ok {
 		switch ctx.Request.URL.String() {
 		case "/users/", "/users":
-			server.getAllUser(ctx)
+			server.getAllUsers(ctx)
 		case "/accounts/", "/accounts":
-			server.getAllAccount(ctx)
+			server.getAllAccounts(ctx)
 		case "/transfers/", "/transfers":
 			server.getAllTransfers(ctx)
+		case "/entries/", "/entries":
+			server.getAllEntries(ctx)
 		}
-		server.getAllTransfers(ctx)
 		return false
 	} else if err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
