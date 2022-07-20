@@ -102,7 +102,7 @@ func (server *Server) listUser(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
-	
+
 	if !server.passListToGetAll(ctx, req) {
 		return
 	}
