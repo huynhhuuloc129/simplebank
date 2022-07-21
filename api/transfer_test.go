@@ -121,7 +121,7 @@ func TestDeleteTransferAPI(t *testing.T) {
 // 					ToAccountID:   Transfer.ToAccountID,
 // 					Amount:        Transfer.Amount,
 // 				}).Times(1).Return(db.TransferTxResult{
-					
+
 // 				})
 // 			},
 // 			checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
@@ -129,64 +129,64 @@ func TestDeleteTransferAPI(t *testing.T) {
 // 				requireBodyMatchTransfer(t, recorder.Body, Transfer)
 // 			},
 // 		},
-		// {
-		// 	name:     "InvalidOwnerOrCurrency",
-		// 	Owner:    Transfer.Owner,
-		// 	Currency: "",
-		// 	buildStubs: func(store *mockdb.MockStore) {
-		// 		store.EXPECT().CreateTransfer(gomock.Any(), gomock.Any()).Times(0)
-		// 	},
-		// 	checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
-		// 		require.Equal(t, http.StatusBadRequest, recorder.Code)
-		// 	},
-		// },
-		// {
-		// 	name:     "InternalError",
-		// 	Owner:    Transfer.Owner,
-		// 	Currency: Transfer.Currency,
-		// 	buildStubs: func(store *mockdb.MockStore) {
-		// 		store.EXPECT().CreateTransfer(gomock.Any(), db.CreateTransferParams{
-		// 			Owner:    Transfer.Owner,
-		// 			Currency: Transfer.Currency,
-		// 		}).Times(1).Return(Transfer, sql.ErrConnDone)
-		// 	},
-		// 	checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
-		// 		require.Equal(t, http.StatusInternalServerError, recorder.Code)
-		// 	},
-		// },
-		// {
-		// 	name:     "ViolationError",
-		// 	Owner:    randomOwner,
-		// 	Currency: Transfer.Currency,
-		// 	buildStubs: func(store *mockdb.MockStore) {
-		// 		store.EXPECT().CreateTransfer(gomock.Any(), db.CreateTransferParams{
-		// 			Owner:    randomOwner,
-		// 			Currency: Transfer.Currency,
-		// 		}).Times(1).Return(Transfer, error(&pq.Error{
-		// 			Code: "23503",
-		// 		}))
-		// 	},
-		// 	checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
-		// 		require.Equal(t, http.StatusForbidden, recorder.Code)
-		// 	},
-		// },
-		// {
-		// 	name:     "UniqueViolationError",
-		// 	Owner:    randomOwner,
-		// 	Currency: Transfer.Currency,
-		// 	buildStubs: func(store *mockdb.MockStore) {
-		// 		store.EXPECT().CreateTransfer(gomock.Any(), db.CreateTransferParams{
-		// 			Owner:    randomOwner,
-		// 			Currency: Transfer.Currency,
-		// 		}).Times(1).Return(Transfer, error(&pq.Error{
-		// 			Code: "23505",
-		// 		}))
-		// 	},
-		// 	checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
-		// 		require.Equal(t, http.StatusForbidden, recorder.Code)
-		// 	},
-	// 	// },
-	// }
+// {
+// 	name:     "InvalidOwnerOrCurrency",
+// 	Owner:    Transfer.Owner,
+// 	Currency: "",
+// 	buildStubs: func(store *mockdb.MockStore) {
+// 		store.EXPECT().CreateTransfer(gomock.Any(), gomock.Any()).Times(0)
+// 	},
+// 	checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
+// 		require.Equal(t, http.StatusBadRequest, recorder.Code)
+// 	},
+// },
+// {
+// 	name:     "InternalError",
+// 	Owner:    Transfer.Owner,
+// 	Currency: Transfer.Currency,
+// 	buildStubs: func(store *mockdb.MockStore) {
+// 		store.EXPECT().CreateTransfer(gomock.Any(), db.CreateTransferParams{
+// 			Owner:    Transfer.Owner,
+// 			Currency: Transfer.Currency,
+// 		}).Times(1).Return(Transfer, sql.ErrConnDone)
+// 	},
+// 	checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
+// 		require.Equal(t, http.StatusInternalServerError, recorder.Code)
+// 	},
+// },
+// {
+// 	name:     "ViolationError",
+// 	Owner:    randomOwner,
+// 	Currency: Transfer.Currency,
+// 	buildStubs: func(store *mockdb.MockStore) {
+// 		store.EXPECT().CreateTransfer(gomock.Any(), db.CreateTransferParams{
+// 			Owner:    randomOwner,
+// 			Currency: Transfer.Currency,
+// 		}).Times(1).Return(Transfer, error(&pq.Error{
+// 			Code: "23503",
+// 		}))
+// 	},
+// 	checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
+// 		require.Equal(t, http.StatusForbidden, recorder.Code)
+// 	},
+// },
+// {
+// 	name:     "UniqueViolationError",
+// 	Owner:    randomOwner,
+// 	Currency: Transfer.Currency,
+// 	buildStubs: func(store *mockdb.MockStore) {
+// 		store.EXPECT().CreateTransfer(gomock.Any(), db.CreateTransferParams{
+// 			Owner:    randomOwner,
+// 			Currency: Transfer.Currency,
+// 		}).Times(1).Return(Transfer, error(&pq.Error{
+// 			Code: "23505",
+// 		}))
+// 	},
+// 	checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
+// 		require.Equal(t, http.StatusForbidden, recorder.Code)
+// 	},
+// 	// },
+// }
 
 // 	for i := range testCases {
 // 		tc := testCases[i]
@@ -279,28 +279,31 @@ func TestListTransfer(t *testing.T) {
 
 	for i := range testCases {
 		tc := testCases[i]
-		ctrl := gomock.NewController(t)
-		defer ctrl.Finish()
+		t.Run(tc.name, func(t *testing.T) {
+			ctrl := gomock.NewController(t)
+			defer ctrl.Finish()
 
-		store := mockdb.NewMockStore(ctrl)
-		// build stubs
-		tc.buildStubs(store)
+			store := mockdb.NewMockStore(ctrl)
+			// build stubs
+			tc.buildStubs(store)
 
-		server := NewServer(store)
-		recorder := httptest.NewRecorder()
+			server := NewServer(store)
+			recorder := httptest.NewRecorder()
 
-		var url string
-		if tc.offset != 0 {
-			url = fmt.Sprintf("/transfers?page_id=%d&page_size=%d", pageId, tc.limit)
-		} else {
-			url = "/transfers?page_size=abcd"
-		}
-		request, err := http.NewRequest(http.MethodGet, url, nil)
-		require.NoError(t, err)
+			var url string
+			if tc.offset != 0 {
+				url = fmt.Sprintf("/transfers?page_id=%d&page_size=%d", pageId, tc.limit)
+			} else {
+				url = "/transfers?page_size=abcd"
+			}
+			request, err := http.NewRequest(http.MethodGet, url, nil)
+			require.NoError(t, err)
 
-		server.router.ServeHTTP(recorder, request)
-		// check response
-		tc.checkResponse(t, recorder)
+			server.router.ServeHTTP(recorder, request)
+			// check response
+			tc.checkResponse(t, recorder)
+
+		})
 	}
 }
 
@@ -338,22 +341,24 @@ func TestGetAllTransferAPI(t *testing.T) {
 	}
 	for i := range testCases {
 		tc := testCases[i]
-		ctrl := gomock.NewController(t)
-		defer ctrl.Finish()
+		t.Run(tc.name, func(t *testing.T) {
+			ctrl := gomock.NewController(t)
+			defer ctrl.Finish()
 
-		store := mockdb.NewMockStore(ctrl)
-		// build stubs
-		tc.buildStubs(store)
+			store := mockdb.NewMockStore(ctrl)
+			// build stubs
+			tc.buildStubs(store)
 
-		// start test server and send request
-		server := NewServer(store)
-		recorder := httptest.NewRecorder()
+			// start test server and send request
+			server := NewServer(store)
+			recorder := httptest.NewRecorder()
 
-		request, err := http.NewRequest(http.MethodGet, "/transfers", nil)
-		require.NoError(t, err)
-		server.router.ServeHTTP(recorder, request)
-		// check response
-		tc.checkResponse(t, recorder)
+			request, err := http.NewRequest(http.MethodGet, "/transfers", nil)
+			require.NoError(t, err)
+			server.router.ServeHTTP(recorder, request)
+			// check response
+			tc.checkResponse(t, recorder)
+		})
 	}
 }
 

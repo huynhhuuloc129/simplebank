@@ -90,8 +90,6 @@ func TestDeleteAccountAPI(t *testing.T) {
 		tc := testCases[i]
 		t.Run(tc.name, func(t *testing.T) {
 			ctrl := gomock.NewController(t)
-			defer ctrl.Finish()
-
 			store := mockdb.NewMockStore(ctrl)
 			// build stubs
 			tc.buildStubs(store)
@@ -198,30 +196,30 @@ func TestCreateAccountAPI(t *testing.T) {
 
 	for i := range testCases {
 		tc := testCases[i]
-		ctrl := gomock.NewController(t)
-		defer ctrl.Finish()
+		t.Run(tc.name, func(t *testing.T) {
+			ctrl := gomock.NewController(t)
+			store := mockdb.NewMockStore(ctrl)
+			// build stubs
+			tc.buildStubs(store)
 
-		store := mockdb.NewMockStore(ctrl)
-		// build stubs
-		tc.buildStubs(store)
+			// start test server and send request
+			server := NewServer(store)
+			recorder := httptest.NewRecorder()
 
-		// start test server and send request
-		server := NewServer(store)
-		recorder := httptest.NewRecorder()
+			request, err := http.NewRequest(http.MethodPost, "/accounts", nil)
+			require.NoError(t, err)
+			body, err := json.Marshal(createAccountRequest{
+				Owner:    tc.Owner,
+				Currency: tc.Currency,
+			})
+			request.Body = io.NopCloser(bytes.NewReader(body))
 
-		request, err := http.NewRequest(http.MethodPost, "/accounts", nil)
-		require.NoError(t, err)
-		body, err := json.Marshal(db.CreateAccountParams{
-			Owner:    tc.Owner,
-			Currency: tc.Currency,
+			require.NoError(t, err)
+			server.router.ServeHTTP(recorder, request)
+
+			// check response
+			tc.checkResponse(t, recorder)
 		})
-		request.Body = io.NopCloser(bytes.NewReader(body))
-
-		require.NoError(t, err)
-		server.router.ServeHTTP(recorder, request)
-
-		// check response
-		tc.checkResponse(t, recorder)
 	}
 
 }
@@ -283,28 +281,28 @@ func TestListAccount(t *testing.T) {
 
 	for i := range testCases {
 		tc := testCases[i]
-		ctrl := gomock.NewController(t)
-		defer ctrl.Finish()
+		t.Run(tc.name, func(t *testing.T) {
+			ctrl := gomock.NewController(t)
+			store := mockdb.NewMockStore(ctrl)
+			// build stubs
+			tc.buildStubs(store)
 
-		store := mockdb.NewMockStore(ctrl)
-		// build stubs
-		tc.buildStubs(store)
+			server := NewServer(store)
+			recorder := httptest.NewRecorder()
 
-		server := NewServer(store)
-		recorder := httptest.NewRecorder()
+			var url string
+			if tc.offset != 0 {
+				url = fmt.Sprintf("/accounts?page_id=%d&page_size=%d", pageId, tc.limit)
+			} else {
+				url = "/accounts?page_size=abcd"
+			}
+			request, err := http.NewRequest(http.MethodGet, url, nil)
+			require.NoError(t, err)
 
-		var url string
-		if tc.offset != 0 {
-			url = fmt.Sprintf("/accounts?page_id=%d&page_size=%d", pageId, tc.limit)
-		} else {
-			url = "/accounts?page_size=abcd"
-		}
-		request, err := http.NewRequest(http.MethodGet, url, nil)
-		require.NoError(t, err)
-
-		server.router.ServeHTTP(recorder, request)
-		// check response
-		tc.checkResponse(t, recorder)
+			server.router.ServeHTTP(recorder, request)
+			// check response
+			tc.checkResponse(t, recorder)
+		})
 	}
 }
 
@@ -340,22 +338,22 @@ func TestGetAllAccountAPI(t *testing.T) {
 	}
 	for i := range testCases {
 		tc := testCases[i]
-		ctrl := gomock.NewController(t)
-		defer ctrl.Finish()
+		t.Run(tc.name, func(t *testing.T) {
+			ctrl := gomock.NewController(t)
+			store := mockdb.NewMockStore(ctrl)
+			// build stubs
+			tc.buildStubs(store)
 
-		store := mockdb.NewMockStore(ctrl)
-		// build stubs
-		tc.buildStubs(store)
+			// start test server and send request
+			server := NewServer(store)
+			recorder := httptest.NewRecorder()
 
-		// start test server and send request
-		server := NewServer(store)
-		recorder := httptest.NewRecorder()
-
-		request, err := http.NewRequest(http.MethodGet, "/accounts", nil)
-		require.NoError(t, err)
-		server.router.ServeHTTP(recorder, request)
-		// check response
-		tc.checkResponse(t, recorder)
+			request, err := http.NewRequest(http.MethodGet, "/accounts", nil)
+			require.NoError(t, err)
+			server.router.ServeHTTP(recorder, request)
+			// check response
+			tc.checkResponse(t, recorder)
+		})
 	}
 }
 
@@ -415,8 +413,6 @@ func TestGetAccountAPI(t *testing.T) {
 		tc := testCases[i]
 		t.Run(tc.name, func(t *testing.T) {
 			ctrl := gomock.NewController(t)
-			defer ctrl.Finish()
-
 			store := mockdb.NewMockStore(ctrl)
 			// build stubs
 			tc.buildStubs(store)
@@ -453,8 +449,6 @@ func requireBodyMatchAllAccounts(t *testing.T, body *bytes.Buffer, accounts []db
 	err = json.Unmarshal(data, &gotAccount)
 	require.NoError(t, err)
 	for i, account := range accounts {
-		fmt.Println(account)
-		fmt.Println(gotAccount[i])
 		require.Equal(t, account, gotAccount[i])
 	}
 }
