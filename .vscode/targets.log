@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Jul 21 09:13:15 2022
+# Make data base, printed on Fri Jul 22 11:04:27 2022
 
 # Variables
 
@@ -65,7 +67,7 @@ VSCODE_CODE_CACHE_PATH = /home/lochuynh/.config/Code/CachedData/3b889b090b5ad579
 # environment
 LANG = C
 # environment
-XAUTHORITY = /run/user/1001/.mutter-Xwaylandauth.LM1CP1
+XAUTHORITY = /run/user/1001/.mutter-Xwaylandauth.AEXOP1
 # default
 .LOADED := 
 # default
@@ -99,7 +101,7 @@ SNAP_REEXEC =
 # environment
 ZSH = /home/lochuynh/.oh-my-zsh
 # environment
-VSCODE_PID = 8540
+VSCODE_PID = 16850
 # environment
 XDG_SESSION_TYPE = wayland
 # automatic
@@ -107,7 +109,7 @@ XDG_SESSION_TYPE = wayland
 # environment
 BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
 # environment
-SESSION_MANAGER = local/LAP00339:@/tmp/.ICE-unix/2841,unix/LAP00339:/tmp/.ICE-unix/2841
+SESSION_MANAGER = local/LAP00339:@/tmp/.ICE-unix/2652,unix/LAP00339:/tmp/.ICE-unix/2652
 # automatic
 *F = $(notdir $*)
 # environment
@@ -153,7 +155,7 @@ LC_TIME = vi_VN
 # environment
 SNAP = /snap/code/102
 # environment
-INVOCATION_ID = 1a157575adcd4277a23803ef7dca0bdd
+INVOCATION_ID = 096f03898f45498489711c67d82108ab
 # environment
 SNAP_REVISION = 102
 # environment
@@ -189,7 +191,7 @@ SNAP_ARCH = amd64
 # makefile
 .DEFAULT_GOAL := postgres
 # environment
-SYSTEMD_EXEC_PID = 2862
+SYSTEMD_EXEC_PID = 2681
 # environment
 DISPLAY = :0
 # environment
@@ -205,11 +207,11 @@ SNAP_DATA = /var/snap/code/102
 # environment
 SNAP_CONTEXT = d40vQKHeMiD12gsVqC0Ji9bsPRm4novVBsBuv1r7Tn2keKTX926P
 # environment
-MANAGERPID = 2664
+MANAGERPID = 2486
 # environment
 LC_MEASUREMENT = vi_VN
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 8448
+GIO_LAUNCHED_DESKTOP_FILE_PID = 16805
 # environment
 PAGER = less
 # environment
@@ -221,7 +223,7 @@ XDG_RUNTIME_DIR = /run/user/1001
 # environment
 GDK_PIXBUF_MODULE_FILE = /home/lochuynh/snap/code/common/.cache/gdk-pixbuf-loaders.cache
 # environment
-JOURNAL_STREAM = 8:41106
+JOURNAL_STREAM = 8:41094
 # environment
 GOMODCACHE = /home/lochuynh/go/pkg/mod
 # environment
@@ -277,9 +279,10 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 
 # Directories
 
-# . (device 64769, inode 8652815): 19 files, no impossibilities.
+# . (device 64769, inode 8652815): 20 files, no impossibilities.
+ 
 
-# 19 files, no impossibilities in 1 directories.
+# 20 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -298,9 +301,6 @@ migratedown:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
- 
-make: *** No rule to make target 'all'.  Stop.
-
 #  Last modified 2022-07-19 13:53:47.812402608
 #  File has been updated.
 #  Successfully updated.
@@ -411,12 +411,12 @@ createdb:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 36 / storage = 318 B / avg = 8 B
-# current buf: size = 8162 B / used = 318 B / count = 36 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 37 / storage = 324 B / avg = 8 B
+# current buf: size = 8162 B / used = 324 B / count = 37 / avg = 8 B
 
-# strcache performance: lookups = 63 / hit rate = 42%
+# strcache performance: lookups = 64 / hit rate = 42%
 # hash-table stats:
-# Load=36/8192=0%, Rehash=0, Collisions=0/63=0%
-# Finished Make data base on Thu Jul 21 09:13:15 2022
+# Load=37/8192=0%, Rehash=0, Collisions=0/64=0%
+# Finished Make data base on Fri Jul 22 11:04:27 2022
 
  
