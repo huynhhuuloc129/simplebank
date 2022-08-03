@@ -21,11 +21,21 @@ type listRequest struct {
 // NewServer create a new HTTP server and setup routing.
 func NewServer(store db.Store) *Server {
 	server := &Server{store: store}
-	router := gin.Default()
 
 	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
 		v.RegisterValidation("currency", validCurrency)
 	}
+	server.setupRouter()
+	return server
+}
+
+// Start runs the HTTP server on a specific address.
+func (server *Server) Start(address string) error {
+	return server.router.Run(address)
+}
+
+func (server *Server) setupRouter(){
+	router := gin.Default()
 
 	router.POST("/accounts", server.createAccount)
 	router.GET("/accounts/:id", server.getAccount)
@@ -47,14 +57,8 @@ func NewServer(store db.Store) *Server {
 	router.GET("/entries/", server.listEntry)
 	router.GET("/entries", server.getAllEntries)
 	// router.DELETE("/transfers/:id", server.deleteEntry)
-
 	server.router = router
-	return server
-}
 
-// Start runs the HTTP server on a specific address.
-func (server *Server) Start(address string) error {
-	return server.router.Run(address)
 }
 
 // errorResponse convert an error to a object
