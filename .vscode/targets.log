@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jul 25 09:05:09 2022
+# Make data base, printed on Thu Aug  4 15:23:35 2022
 
 # Variables
 
@@ -65,7 +65,7 @@ VSCODE_CODE_CACHE_PATH = /home/lochuynh/.config/Code/CachedData/3b889b090b5ad579
 # environment
 LANG = C
 # environment
-XAUTHORITY = /run/user/1001/.mutter-Xwaylandauth.RSPHP1
+XAUTHORITY = /run/user/1001/.mutter-Xwaylandauth.ID2HQ1
 # default
 .LOADED := 
 # default
@@ -75,7 +75,7 @@ MAKEFLAGS = pqrR
 # makefile
 CURDIR := /home/lochuynh/Desktop/simplebank
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
@@ -99,7 +99,7 @@ SNAP_REEXEC =
 # environment
 ZSH = /home/lochuynh/.oh-my-zsh
 # environment
-VSCODE_PID = 12620
+VSCODE_PID = 1877083
 # environment
 XDG_SESSION_TYPE = wayland
 # automatic
@@ -107,7 +107,7 @@ XDG_SESSION_TYPE = wayland
 # environment
 BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
 # environment
-SESSION_MANAGER = local/LAP00339:@/tmp/.ICE-unix/9452,unix/LAP00339:/tmp/.ICE-unix/9452
+SESSION_MANAGER = local/LAP00339:@/tmp/.ICE-unix/2868,unix/LAP00339:/tmp/.ICE-unix/2868
 # automatic
 *F = $(notdir $*)
 # environment
@@ -153,7 +153,7 @@ LC_TIME = vi_VN
 # environment
 SNAP = /snap/code/102
 # environment
-INVOCATION_ID = 808a171316944a23a0095c10bb768b72
+INVOCATION_ID = d0b1d4a4c33243018841c21f0517bed5
 # environment
 SNAP_REVISION = 102
 # environment
@@ -189,7 +189,7 @@ SNAP_ARCH = amd64
 # makefile
 .DEFAULT_GOAL := postgres
 # environment
-SYSTEMD_EXEC_PID = 9507
+SYSTEMD_EXEC_PID = 2897
 # environment
 DISPLAY = :0
 # environment
@@ -205,11 +205,11 @@ SNAP_DATA = /var/snap/code/102
 # environment
 SNAP_CONTEXT = d40vQKHeMiD12gsVqC0Ji9bsPRm4novVBsBuv1r7Tn2keKTX926P
 # environment
-MANAGERPID = 9220
+MANAGERPID = 2703
 # environment
 LC_MEASUREMENT = vi_VN
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 12493
+GIO_LAUNCHED_DESKTOP_FILE_PID = 1877040
 # environment
 PAGER = less
 # environment
@@ -221,7 +221,7 @@ XDG_RUNTIME_DIR = /run/user/1001
 # environment
 GDK_PIXBUF_MODULE_FILE = /home/lochuynh/snap/code/common/.cache/gdk-pixbuf-loaders.cache
 # environment
-JOURNAL_STREAM = 8:69071
+JOURNAL_STREAM = 8:40088
 # environment
 GOMODCACHE = /home/lochuynh/go/pkg/mod
 # environment
@@ -279,10 +279,10 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 
 # . (device 64769, inode 8652815): 20 files, no impossibilities.
 
+# 20 files, no impossibilities in 1 directories.
  
 make: *** No rule to make target 'all'.  Stop.
 
-# 20 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -417,6 +417,6 @@ createdb:
 # strcache performance: lookups = 64 / hit rate = 42%
 # hash-table stats:
 # Load=37/8192=0%, Rehash=0, Collisions=0/64=0%
-# Finished Make data base on Mon Jul 25 09:05:09 2022
+# Finished Make data base on Thu Aug  4 15:23:35 2022
 
  

@@ -73,7 +73,7 @@ func TestDeleteTransferAPI(t *testing.T) {
 			tc.buildStubs(store)
 
 			// start test server and send request
-			server := NewServer(store)
+			server := newTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
 			url := fmt.Sprintf("/transfers/%d", tc.TransferID)
@@ -287,7 +287,7 @@ func TestListTransfer(t *testing.T) {
 			// build stubs
 			tc.buildStubs(store)
 
-			server := NewServer(store)
+			server := newTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
 			var url string
@@ -350,7 +350,7 @@ func TestGetAllTransferAPI(t *testing.T) {
 			tc.buildStubs(store)
 
 			// start test server and send request
-			server := NewServer(store)
+			server := newTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
 			request, err := http.NewRequest(http.MethodGet, "/transfers", nil)
@@ -427,7 +427,7 @@ func TestGetTransferAPI(t *testing.T) {
 			tc.buildStubs(store)
 
 			// start test server and send request
-			server := NewServer(store)
+			server := newTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
 			url := fmt.Sprintf("/transfers/%d", tc.TransferID)

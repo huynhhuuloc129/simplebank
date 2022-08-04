@@ -138,7 +138,7 @@ func TestCreateUserAPI(t *testing.T) {
 			// build stubs
 			tc.buildStubs(store)
 
-			server := NewServer(store)
+			server := newTestServer(t, store)
 			recorder := httptest.NewRecorder()
 			request, err := http.NewRequest(http.MethodPost, "/users", nil)
 			require.NoError(t, err)
@@ -221,7 +221,7 @@ func TestListUserAPI(t *testing.T) {
 			// build stubs
 			tc.buildStubs(store)
 
-			server := NewServer(store)
+			server := newTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
 			var url string
@@ -284,7 +284,7 @@ func TestGetAllUserAPI(t *testing.T) {
 			// build stubs
 			tc.buildStubs(store)
 
-			server := NewServer(store)
+			server := newTestServer(t, store)
 			recorder := httptest.NewRecorder()
 			request, err := http.NewRequest(http.MethodGet, "/users", nil)
 			require.NoError(t, err)
@@ -363,7 +363,7 @@ func TestGetUserAPI(t *testing.T) {
 			request, err := http.NewRequest(http.MethodGet, url, nil)
 			require.NoError(t, err)
 			recorder := httptest.NewRecorder()
-			server := NewServer(store)
+			server := newTestServer(t, store)
 			server.router.ServeHTTP(recorder, request)
 
 			// check response
