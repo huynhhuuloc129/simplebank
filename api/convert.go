@@ -28,7 +28,7 @@ func (server *Server) passListToGetAll(ctx *gin.Context, req listRequest) bool {
 		return false
 	}
 	if ok, err := MissingFieldStruct(&req); ok {
-		ctx.JSON(http.StatusBadRequest, errorResponse(errors.New("Request must have all field or empty")))
+		ctx.JSON(http.StatusBadRequest, errorResponse(errors.New("request must have all field or empty")))
 		return false
 	} else if err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
